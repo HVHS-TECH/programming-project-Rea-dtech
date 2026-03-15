@@ -1,7 +1,10 @@
 let img;
 let seaGull;
+let fish;
+let oceanBackground;
 function preload() {
     img = loadImage('seagull.png');
+    oceanBackground = loadImage('image.png')
 }
 
 function setup() {
@@ -11,7 +14,8 @@ function setup() {
 }
 let gameState = 'start';
 function draw() {
-    background(220);
+    background(oceanBackground);
+
     if (gameState === 'start') {
         displaystartScreen();
     }
@@ -21,13 +25,15 @@ function draw() {
     else if (gameState === 'gameOver') {
         displayGameOverScreen();
     }
+    /*
+    ATTEMPT AT KBM MOVEMENT MAY USE
     if (kb.pressing('left')) {
 
-        seaGull.rotate(-10);
+        seaGull.rotate(-50);
     }
     if (kb.pressing('right')) {
         
-        seaGull.rotate(10);
+        seaGull.rotate(50);
     }
     if (kb.pressing('up')) {
     // work out how to get it to move
@@ -35,18 +41,21 @@ function draw() {
     if (kb.pressing('down')) {
       // same thing
     }
+      */
+
 }
 // improve the start screen and think of a better game name
 function displaystartScreen() {
     textAlign(CENTER, CENTER);
     textSize(20);
-    text('Welcome to Fishing, click to start, full screen is recommended (press F11 or the full screen button on your keyboard)', width / 2, height / 2);
+    text('Welcome to Fishing, click to start (press F11 or the full screen button on your keyboard if you would prefer full screen then reload the page )', width / 2, height / 2);
 }
 
 function playGame() {
     // game code goes here just has the text for now
-  
 
+    seaGull.moveTowards(mouse, 0.20);
+    seaGull.rotateTowards(mouse, 1, -100);
     text('game', width / 2, height / 2);
 }
 function displayGameOverScreen() {
@@ -56,7 +65,8 @@ function mousePressed() {
     if (gameState === 'start' || gameState === 'gameOver') {
         gameState = 'play';
         seaGull = new Sprite(width / 2, height / 2, 10, 10);
-            seaGull.img = img;
+        fish = new Sprite()
+        seaGull.img = img;
         seaGull.scale = 0.5;
         // add to reset game variables if needed
     }
