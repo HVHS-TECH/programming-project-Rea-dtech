@@ -78,14 +78,14 @@ function mousePressed() {
         
         seaGull = new Sprite(width / 2, height / 2, 100, 100);
         fish = new Sprite(500, 500, 10, 10)
-        fish.setCollider("rectangle", 0, 0, 50, 50)
+     
         seaGull.img = gullImg;
         seaGull.scale = 0.5;
         fish.scale = 0.35
         fish.img = fishImg;
         seaGull.debug = true;
         fish.debug = true;
-       
+       //does not work idk why   fish.setCollider("rectangle", 0, 0, 50, 50)
         // add to reset game variables if needed
     }
 
