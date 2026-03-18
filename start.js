@@ -13,7 +13,7 @@ function preload() {
 function setup() {
 
     createCanvas(windowWidth, windowHeight);
-    
+
 }
 let gameState = 'start';
 function draw() {
@@ -60,11 +60,29 @@ function displaystartScreen() {
     );
 }
 
+// spawns fish and has them go to the bottom of the screen and can be eaten
+function spawnFish() {
+     if (fish) {
+        fish.remove();
+    }
+    fish = new Sprite(random(50, width - 10), -100, 10, 10)
+    fish.vel.y = random(4, 13);
+    fish.addCollider(0, 5, 200, 80)
+    fish.scale = 0.35
+    fish.img = fishImg;
+      fish.debug = true;
+    fish.rotation= 90
+}
 function playGame() {
     // game code goes here just has the text for now
     if (seaGull.collides(fish)) {
-        fish.remove();
+        spawnFish();
     }
+
+    if (fish.y > height + 50) {
+        spawnFish();
+    }
+
     seaGull.moveTowards(mouse, 0.20);
     seaGull.rotateTowards(mouse, 1, -100);
 
@@ -72,20 +90,18 @@ function playGame() {
 function displayGameOverScreen() {
     text('Game Over', width / 2, height / 2);
 }
+// when the mouse is pressed on the start menu the gamestate is changed to play and loads all of the sprites
+
+
 function mousePressed() {
     if (gameState === 'start' || gameState === 'gameOver') {
         gameState = 'play';
-        
         seaGull = new Sprite(width / 2, height / 2, 100, 100);
-        fish = new Sprite(500, 500, 10, 10)
-     
+        spawnFish();
         seaGull.img = gullImg;
         seaGull.scale = 0.5;
-        fish.scale = 0.35
-        fish.img = fishImg;
         seaGull.debug = true;
-        fish.debug = true;
-       //does not work idk why   fish.setCollider("rectangle", 0, 0, 50, 50)
+        seaGull.addCollider(0, 20, 50, 50)
         // add to reset game variables if needed
     }
 
@@ -93,3 +109,10 @@ function mousePressed() {
 // maybe add if a key is press to do something on the menu
 function keyPressed() {
 } 
+
+
+
+
+
+
+
