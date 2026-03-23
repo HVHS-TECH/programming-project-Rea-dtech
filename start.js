@@ -1,9 +1,11 @@
+//fix copyright for imgs
+
 let gullImg;
 let seaGull;
 let fish;
 let oceanBackground;
-let score;
 let fishImg;
+let score = 0;
 function preload() {
     gullImg = loadImage('seagull.png');
     oceanBackground = loadImage('image.png')
@@ -21,12 +23,18 @@ function draw() {
 
     if (gameState === 'start') {
         displaystartScreen();
+
     }
     else if (gameState === 'play') {
         playGame();
+        textSize(20);
+        textAlign(LEFT);
+        text('Score: ' + score, 10, 30);
     }
     else if (gameState === 'gameOver') {
         displayGameOverScreen();
+
+
     }
 
 
@@ -62,25 +70,26 @@ function displaystartScreen() {
 
 // spawns fish and has them go to the bottom of the screen and can be eaten
 function spawnFish() {
-     if (fish) {
+    if (fish) {
         fish.remove();
     }
     fish = new Sprite(random(50, width - 10), -100, 10, 10)
-    fish.vel.y = random(4, 13);
-    fish.addCollider(0, 5, 200, 80)
+    fish.vel.y = random(6, 20);
+    fish.addCollider(0, 5, 210, 90)
     fish.scale = 0.35
     fish.img = fishImg;
-      fish.debug = true;
-    fish.rotation= 90
+    fish.debug = true;
+    fish.rotation = 90
 }
 function playGame() {
-    // game code goes here just has the text for now
+    // game code goes here and we have the code for the fish being eaten and the seagulls movement
     if (seaGull.collides(fish)) {
+        score += 1;
         spawnFish();
     }
 
     if (fish.y > height + 50) {
-        spawnFish();
+        gameState = 'gameOver';
     }
 
     seaGull.moveTowards(mouse, 0.20);
@@ -88,27 +97,37 @@ function playGame() {
 
 }
 function displayGameOverScreen() {
-    text('Game Over', width / 2, height / 2);
+    if (seaGull) {
+        seaGull.remove();
+    }
+    textAlign(CENTER, CENTER);
+    text('Game Over, click the mouse to play again', width / 2, height / 2);
+    textSize(40)
 }
 // when the mouse is pressed on the start menu the gamestate is changed to play and loads all of the sprites
 
 
 function mousePressed() {
     if (gameState === 'start' || gameState === 'gameOver') {
+
         gameState = 'play';
+        score = 0;
+        if (seaGull) {
+            seaGull.remove();
+        }
         seaGull = new Sprite(width / 2, height / 2, 100, 100);
         spawnFish();
         seaGull.img = gullImg;
         seaGull.scale = 0.5;
         seaGull.debug = true;
         seaGull.addCollider(0, 20, 50, 50)
+
         // add to reset game variables if needed
     }
-
 }
 // maybe add if a key is press to do something on the menu
 function keyPressed() {
-} 
+}
 
 
 
