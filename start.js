@@ -78,7 +78,6 @@ function spawnFish() {
     fish.addCollider(0, 5, 210, 90)
     fish.scale = 0.35
     fish.img = fishImg;
-    fish.debug = true;
     fish.rotation = 90
 }
 function playGame() {
@@ -88,7 +87,7 @@ function playGame() {
         spawnFish();
     }
 
-    if (fish.y > height + 50) {
+    if (fish.y > height + 0) {
         gameState = 'gameOver';
     }
 
@@ -119,7 +118,6 @@ function mousePressed() {
         spawnFish();
         seaGull.img = gullImg;
         seaGull.scale = 0.5;
-        seaGull.debug = true;
         seaGull.addCollider(0, 20, 50, 50)
 
         // add to reset game variables if needed
