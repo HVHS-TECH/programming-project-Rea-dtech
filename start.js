@@ -1,5 +1,13 @@
-//fix copyright for imgs
+
 const credits = "seagull and fish art: freepik.com";
+const tips = [
+    "try to move slowly not quickly to avoid missing the fish",
+    "be prepared for a fish to spawn in at the other side of the screen",
+    "your lives can go quickly so when you lose one don't just give up catch the next fish",
+    "did you know the game developers high score is 69",
+    "make sure your movements are controlled ",
+];
+let currentTip;
 let lives = 3;
 let gullImg;
 let seaGull;
@@ -38,7 +46,7 @@ function draw() {
             noStroke();
             ellipse(20 + i * 25, 90, 15, 15);
         }
-        fill(255); // reset fill for other text
+        fill(255); 
     }
     else if (gameState === 'gameOver') {
         displayGameOverScreen();
@@ -46,24 +54,6 @@ function draw() {
 
     }
 
-
-    /*
-    ATTEMPT AT KBM MOVEMENT MAY USE
-    if (kb.pressing('left')) {
-
-        seaGull.rotate(-50);
-    }
-    if (kb.pressing('right')) {
-        
-        seaGull.rotate(50);
-    }
-    if (kb.pressing('up')) {
-    // work out how to get it to move
-    }
-    if (kb.pressing('down')) {
-      // same thing
-    }
-      */
 
 }
 // improve the start screen and think of a better game name
@@ -81,7 +71,7 @@ function displaystartScreen() {
     textAlign(CENTER, CENTER);
     textSize(20.5);
     fill(255);
-    text('(press F11 or the full screen button on your keyboard if you would prefer full screen then reload the page in order to eat the fish you have to get it with the beak of the seagull)', width / 2, height / 3 + 40);
+    text('(To control the seagull use your mouse as the seagull follows the mouse and the goal is to catch the fish if you miss the fish then you would lose a live)', width / 2, height / 3 + 40);
     textSize(16);
     text('Credits: sprites from freepik.com', width / 2, height / 3 + 80);
 }
@@ -106,9 +96,10 @@ function playGame() {
         spawnFish();
     }
     //if lives are at 0 game over and one is lost every time the fish goes through the bottom of the screen
-    if (fish.y > height + 0) {
+    if (fish.y > height) {
         lives -= 1;
         if (lives <= 0) {
+            currentTip = random(tips);
             gameState = 'gameOver';
         } else {
             spawnFish();
@@ -125,6 +116,9 @@ function displayGameOverScreen() {
     }
     textAlign(CENTER, CENTER);
     text('Game Over, click the mouse to play again and you caught ' + score + ' fish', width / 2, height / 2);
+
+    textSize(20);
+    text('Tip: ' + currentTip, width / 2, height / 2 + 50);
 
     textSize(40)
 }
@@ -149,9 +143,7 @@ function mousePressed() {
         // add to reset game variables if needed
     }
 }
-// maybe add if a key is press to do something on the menu
-function keyPressed() {
-}
+
 
 
 
