@@ -125,12 +125,15 @@ function displayGameOverScreen() {
         seaGull.remove();
     }
     textAlign(CENTER, CENTER);
-    text('Game Over, click the mouse to play again and you caught ' + score + ' fish', width / 2, height / 2);
+
+    textSize(40);
+    text('Game Over - Click to play again', width / 2, height * 0.15);
+
+    textSize(24);
+    text('You caught ' + score + ' fish - High score ' + highScore, width / 2, height * 0.23);
 
     textSize(20);
-    text('Tip: ' + currentTip, width / 2, height / 2 + 50);
-    text('highscore = ' + highScore, width / 2, height / 2 + 100)
-    textSize(40)
+    text('Tip - ' + currentTip, width / 2, height * 0.30);
 }
 /* when the mouse is pressed on the start menu the gamestate is changed to play and loads all of the sprites and runs the spawnFish function and the score and lives */
 
