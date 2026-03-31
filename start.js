@@ -67,21 +67,23 @@ function windowResized() {
 // startscreen this is displayed when the game is loaded
 function displayStartScreen() {
     textAlign(CENTER, CENTER);
-    textSize(24);
-    fill(255)
-    text(
-        'Welcome to Bird catch fish, click to start ',
-
-        width / 2,
-        height / 3
-    );
-   
-    textAlign(CENTER, CENTER);
-    textSize(20.5);
     fill(255);
-    text('(To control the seagull use your mouse as the seagull follows the mouse and the goal is to catch the fish if you miss the fish then you would lose a live and if you lose all 3 lives then game over )', width / 2, height / 3 + 40);
+
+    textSize(40);
+    text('Bird Catch Fish', width / 2, height * 0.16);
+
+    textSize(26);
+    text('Click anywhere to start', width / 2, height * 0.24);
+
+    textSize(20);
+    text('Use the mouse to move the seagull and catch the fish', width / 2, height * 0.32);
+    text('Miss the fish and lose a life, losing all 3 means game over', width / 2, height * 0.38);
+
+    textSize(18);
+    text('Tip: move smoothly and stay near falling fish', width / 2, height * 0.45);
+
     textSize(16);
-    text('Credits: sprites from freepik.com', width / 2, height / 3 + 80);
+    text('Credits: fish and bird sprites from freepik.com', width / 2, height * 0.52);
 }
 
 
